@@ -1,0 +1,135 @@
+doctype 5
+html
+  head
+    title= title
+  body
+    include head
+    form(class="form-horizontal",method="post" id="form")
+      input(type="hidden" id="photp_url")
+      input(type="hidden" id="x1")
+      input(type="hidden" id="x2")
+      input(type="hidden" id="y1")
+      input(type="hidden" id="y2")
+      input(type="hidden" id="w")
+      input(type="hidden" id="h")
+      fieldset
+        legend 上传头像
+        div.avatar_setting
+          .left
+            img(src="#{user.userExt.photo}" class="upload_img" id="big" onerror="this.src='/images/user_photo.jpg'")
+          div(class="right fixed")
+            .avatar_b
+              .img
+                img(src="#{user.userExt.photo}" class="upload_img" title="150X150像素" onerror="this.src='/images/user_photo.jpg'")  
+            .avatar_m
+              .img
+                img(src="#{user.userExt.photo}" class="upload_img" title="75X75像素" onerror="this.src='/images/user_photo.jpg'") 
+            .avatar_s
+              .img
+                img(src="#{user.userExt.photo}" class="upload_img" title="50X50像素" onerror="this.src='/images/user_photo.jpg'") 
+        div.clear
+        .form-actions
+          span(class="btn btn-primary" id="img_select") 点击选择图片
+          button(class="btn btn-primary" id="upload_btn" data-loading-text="正在上传.." type="button" style="margin-left:10px;") 上传头像
+          img(src="/images/loading.gif" class="loading")
+          br
+          br
+          div.alert.alert-block.alert-error.hide
+            a(class="close_alert" href="#") &times;
+    include footer
+<script src="/thirdparty/kindeditor-all.js"></script>
+<script src="/thirdparty/Jcrop/jquery.Jcrop.js"></script>
+link(rel='stylesheet', href='/thirdparty/themes/default/default.css')
+link(rel='stylesheet', href='/thirdparty/css/jquery.Jcrop.css')
+script
+  $(function(){
+    var close_html='<a class="close" data-dismiss="alert" href="#">&times;</a>';
+    $(".alert").alert();
+    $(".close_alert").click(function(){
+      $(".alert").fadeOut();
+    });
+    $("#upload_btn").click(function(){
+      if($("#photp_url").val()==""){
+        new Toast({context:$('body'),message:'请选择图片！！',type:"alert_warning"}).show();
+        return;
+      }
+      $(this).button('loading');
+      $(".loading").show();
+      $.post("/u/uploadphoto",{id:"#{user.id}",url:$("#photp_url").val(),
+        x1:$("#x1").val(),x2:$("#x2").val(),y1:$("#y1").val(),y2:$("#y2").val(),w:$("#w").val(),h:$("#h").val(),}
+        ,function(data){
+        if(data=="1"){
+          new Toast({context:$('body'),message:'保存成功！',type:"alert_right"}).show(function(){
+            location="/";
+          });
+        }else{
+          new Toast({context:$('body'),message:'保存异常！！',type:"alert_right"}).show()
+        }
+      });
+    });
+  });
+  function setImgCutMode(){
+    var jcrop_api, boundx, boundy; 
+    $('#big').Jcrop({
+      onChange: updatePreview,
+      onSelect: updatePreview,
+      onDblClick:cutImg,
+      aspectRatio: 1,
+      bgFade:true,
+      bgOpacity: .5,
+      setSelect: [0,0,60,60] 
+    },function(){
+      // Use the API to get the real image size
+      var bounds = this.getBounds(); 
+      boundx = bounds[0];
+      boundy = bounds[1];
+      // Store the API in the jcrop_api variable
+      jcrop_api = this;
+      jcrop_api.ui.holder.addClass('jcrop-light');
+    });
+    function cutImg(c){
+
+    }
+    function updatePreview(c)
+    {
+      if (parseInt(c.w) > 0)
+      {
+        var rx = 100 / c.w;
+        var ry = 100 / c.h;
+
+        $('#preview').css({
+          width: Math.round(rx * boundx) + 'px',
+          height: Math.round(ry * boundy) + 'px',
+          marginLeft: '-' + Math.round(rx * c.x) + 'px',
+          marginTop: '-' + Math.round(ry * c.y) + 'px'
+        });  
+      }
+      $('#x1').val(c.x);
+      $('#y1').val(c.y);
+      $('#x2').val(c.x2);
+      $('#y2').val(c.y2);
+      $('#w').val(c.w);
+      $('#h').val(c.h); 
+    };
+  } 
+  KindEditor.ready(function(K) {
+    var editor = K.editor({
+      allowFileManager : true,
+      uploadJson : '/upload/imgupload'
+    });
+    K('#img_select').click(function() {
+      editor.loadPlugin('image', function() {
+        editor.plugin.imageDialog({
+          showRemote : false,
+          imageUrl : K('#photp_url').val(),
+          clickFn : function(url, title, width, height, border, align) {
+            K('.upload_img').attr("src","/uimages/user/thumb/"+title); 
+            K('#photp_url').val("/uimages/user/thumb/"+title)
+            editor.hideDialog();
+            setImgCutMode();
+          }
+        });
+      });
+    });
+  });
+

@@ -1,0 +1,266 @@
+doctype 5
+html
+  head
+    title= title
+  body
+    include head
+    if user!=null
+      input(type="hidden" id="tmp_userId" value="#{user.id}")
+      input(type="hidden" id="isApplied" value="#{user.isApplied}")
+    div.stage
+      fieldset
+        legend 
+          span(style="float:left;") T1组
+          if tribe.status==0
+            button(class="btn btn-danger start_btn" data-loading-text="正在开启.." type="button" style="margin-left:10px;") 开启报名 
+            input(type="button" id="startTime" value="选择开始时间" class="btn time_select_btn select_starttime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'new Date()'})")
+            input(type="button" id="endTime" value="选择结束时间" class="btn time_select_btn select_starttime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'new Date()'})")
+            img(src="/images/loading.gif" class="loading startSign" style="margin:8px 0 0 7px;float:left;")
+          else
+            if tribe.activity
+            p.text-info.start_status_fonts 报名进行中... 开始时间：<b id="startTime" class="text-warning"></b> 结束时间：<b id="endTime" class="text-warning"></b>
+          div.clear
+        div.control-group#team1
+          div.select_wrap
+          div.select_wrap
+          div.select_wrap
+          div.select_wrap
+          div.select_wrap
+          div.select_wrap
+          div.apply_wrap
+            if tribe.status==1
+              if user
+                button(class="btn btn-primary disabled apply_btn" userId="#{user.id}" rel="1" data-loading-text="正在报名.." type="button" style="margin-left:10px;") loading..
+              else
+                请先登录
+            else
+              button(class="btn btn-primary disabled apply_btn" rel="1" data-loading-text="正在报名.." type="button" style="margin-left:10px;") 报名还未开启 
+            img(src="/images/loading2.gif" class="loading btn_loading")
+      fieldset
+        legend T2组
+        div.control-group#team2
+          div.select_wrap
+          div.select_wrap
+          div.select_wrap
+          div.select_wrap
+          div.select_wrap
+          div.select_wrap
+          div.apply_wrap
+            if tribe.status==1
+              if user
+                button(class="btn btn-primary disabled apply_btn" userId="#{user.id}" rel="2" data-loading-text="正在报名.." type="button" style="margin-left:10px;") loading..
+              else
+                请先登录
+            else
+              button(class="btn btn-primary disabled apply_btn" rel="2" data-loading-text="正在报名.." type="button" style="margin-left:10px;") 报名还未开启 
+            img(src="/images/loading2.gif" class="loading btn_loading")
+      fieldset
+        legend T3组
+        div.control-group#team3
+          div.select_wrap
+          div.select_wrap
+          div.select_wrap
+          div.select_wrap
+          div.select_wrap
+          div.select_wrap
+          div.apply_wrap
+            if tribe.status==1
+              if user
+                button(class="btn btn-primary disabled apply_btn" userId="#{user.id}" rel="3" data-loading-text="正在报名.." type="button" style="margin-left:10px;") loading..
+              else
+                请先登录
+            else
+              button(class="btn btn-primary disabled apply_btn" type="button" style="margin-left:10px;") 报名还未开启 
+            img(src="/images/loading2.gif" class="loading btn_loading")
+      fieldset
+        legend 替补
+        div.control-group
+    div.group_wrap
+      fieldset
+        legend 
+          部落成员 
+    div.clear
+    include footer
+<script src="/thirdparty/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+script
+  $(function(){
+    var userId=$("#tmp_userId").val();
+    /*
+    * 开始时间和结束时间是否允许报名标识
+    * 只有当开始允许以及结束允许的同时 才可以报名
+    */
+    var start_apply_allow=false;
+    var end_apply_allow=false;
+    //进入报名状态
+    var enter_apply=false;
+
+    //报名是否开启
+    var isUnlock="#{tribe.status}";
+
+    $(".start_btn").click(function(){
+      var startTime=$("#startTime").val();
+      var endTime=$("#endTime").val();
+      if(startTime!="选择开始时间"&&startTime!=""){
+        if(endTime!="选择结束时间"&&endTime!=""){
+          $(this).button('loading');
+          $(".startSign").show();
+          $.post("/u/startactivity",{tribeId:"#{tribe.id}",startTime:startTime,endTime:endTime},function(data){
+            if(data=="1"){
+              new Toast({context:$('body'),message:'活动已开启...'}).show(function(){
+                location.reload();
+              });
+            }else if(data=="2"){
+              new Toast({context:$('body'),message:'开启异常，你没有权限！'}).show();
+            }else{
+              new Toast({context:$('body'),message:'程序异常！！'}).show();
+            }
+          });
+        }else{
+          new Toast({context:$('body'),message:'请选择结束时间！',type:"alert_warning"}).show();
+        }
+      }else{
+        new Toast({context:$('body'),message:'请选择开始时间！',type:"alert_warning"}).show();
+      }
+    });
+
+    var startParams="#{signLeft}".split(",");
+    var endParams="#{endLeft}".split(",");
+    var startTime=startParams[1];
+    var endTime=endParams[1];
+    if(startParams[0]=="times"){
+      if(parseInt(startTime)>0){
+        $("#startTime").text("还有 "+getLastTimes(startTime));
+        var startInterval=setInterval(function(){
+          startTime--;
+          if(startTime<=0){
+            start_apply_allow=true;
+            $("#startTime").text("已开始"); 
+            clearInterval(startInterval);
+          }else{
+            start_apply_allow=false;
+            $("#startTime").text("还有 "+getLastTimes(startTime));
+          }
+        },1000);
+      }else{
+        start_apply_allow=true; 
+        $("#startTime").text("已开始");
+      }
+    }else{
+      start_apply_allow=false;
+      if(startTime<0){
+        start_apply_allow=true;
+        $("#startTime").text("已结束");
+      }else{
+        $("#startTime").text("还剩："+startTime+"天");
+      }
+    }
+    if(endParams[0]=="times"){
+      if(parseInt(endTime)>0){
+        end_apply_allow=true;
+        $("#endTime").text("还有 "+getLastTimes(endTime));
+        var endInterval=setInterval(function(){
+          endTime--;
+          if(endTime<=0){
+            end_apply_allow=false;
+            $("#endTime").text("已结束");
+            clearInterval(endInterval);
+          }else{
+            end_apply_allow=true;
+            $("#endTime").text("还有 "+getLastTimes(endTime));
+          }
+          if(!enter_apply){
+            refreshApplyBtn();
+          }
+          if($("#isApplied").val()=="true"){
+            end_apply_allow=false;
+            $(".apply_btn").addClass("disabled"); 
+            $(".apply_btn").text("已报名");
+          }
+        },1000);
+      }else{
+        end_apply_allow=false;
+        $("#endTime").text("已结束");
+      }
+    }else{
+      end_apply_allow=false;
+      if(endTime<0){
+        $("#endTime").text("已结束");
+      }else{
+        end_apply_allow=true;
+        $("#endTime").text("还剩："+endTime+"天");
+      } 
+    }
+
+    refreshApplyBtn();
+
+    //刷新报名按钮的方法
+    function refreshApplyBtn(){
+      if(start_apply_allow&&end_apply_allow){
+        $(".apply_btn").removeClass("disabled"); 
+        $(".apply_btn").text("报名");
+      }else{
+        $(".apply_btn").addClass("disabled"); 
+        $(".apply_btn").text("未开始");
+      }
+    }
+
+    function getLastTimes(startTime){
+      var hours=~~(startTime/(60*60));
+      var second=~~((startTime%(60*60))/60);
+      var mills=(startTime%(60*60))%60;
+      return hours+":"+second+":"+mills;
+    }
+
+    if(isUnlock=="0"){
+      $(".apply_btn").text("报名还未开启");
+    }
+
+    //利用websocket进行报名的操作
+    var socket = io.connect('http://123.127.240.133:3000');
+
+    //报名申请
+    $(".apply_btn").live("click",function(){
+      if(start_apply_allow&&end_apply_allow){ 
+        $(".apply_btn").text("正在报名..").addClass("disabled");
+        $(this).siblings(".loading").show();
+        enter_apply=true;
+        start_apply_allow=false;
+        socket.emit('applysocket',{ 
+          userId:$(this).attr("userId"),
+          team: $(this).attr("rel"),
+          tribe: "#{tribe.id}"
+        });
+      }
+    });
+
+    if($("#isApplied").val()=="true"){
+      end_apply_allow=false;
+      $(".apply_btn").addClass("disabled"); 
+      $(".apply_btn").text("已报名");
+    }
+
+    //申请回调
+    socket.on('applyresult', function (data) { 
+      var div_group=$("#team"+data.team);
+      var stop_loop=false;
+      if(data.code=="1"){
+        div_group.children(".select_wrap").each(function(){ 
+          if(!stop_loop){
+            if(typeof($(this).attr("selected"))=="undefined"){
+              $(this).attr("selected","selected")
+                .append("<img titile='"+data.user.name+"' src='"+data.user.userExt.photo+"' onerror=\"this.src='/images/user_photo.jpg'\" />");
+              if(userId==data.userId){
+                new Toast({context:$('body'),message:data.message}).show();
+                $(".loading").hide();
+                $(".apply_btn").text("已报名");
+              }
+              stop_loop=true;
+              return;
+            }
+          }
+        });
+      }else{
+        new Toast({context:$('body'),message:"报名失败，"+data.message}).show();
+      }
+    });
+  });

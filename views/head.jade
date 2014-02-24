@@ -1,0 +1,62 @@
+link(rel='stylesheet', href='/stylesheets/style.css')
+link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+link(rel='stylesheet', href='/stylesheets/bootstrap-responsive.css')
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+
+style(type="text/css")
+  body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+  }
+  .sidebar-nav {
+    padding: 9px 0;
+  }
+  @media (max-width: 980px) {
+    /* Enable use of floated navbar text */
+    .navbar-text.pull-right {
+      float: none;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+  }
+div.navbar.navbar-fixed-top
+  div.navbar-inner
+    div.container-fluid
+      img(src="/images/logo.png" class="logo_img")
+      button(class="btn btn-navbar",data-toggle="collapse",data-target=".nav-collapse")
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a(class="brand",href="/")
+        | 拼球网--上地蓝色狂飙足球部落
+      div(class="nav-collapse collapse")
+        ul.nav
+          if location=="index"
+            li(class="active") 
+              a(href="/") 首页
+          else
+            li 
+              a(href="/") 首页
+          if user==null
+            if location=="login"
+              li(class="active") 
+                a(href="/login") 登录
+            else
+              li 
+                a(href="/login") 登录
+            if location=="regis"
+              li(class="active") 
+                a(href="/regis") 注册
+            else
+              li 
+                a(href="/regis") 注册
+          else
+      div.user_photo_wrap
+        if user!=null
+          img(src="#{user.userExt.photo}" class="img-polaroid" style="width:30px;" onerror="this.src='/images/user_photo.jpg'" onclick="location='/u/uploadphoto/#{user.id}'")
+          a(href="/u/#{user.id}") #{user.name}
+          a(href="/logout") 退出
+      div.notice
+        if tribe!=null
+          公告：#{tribe.notice}

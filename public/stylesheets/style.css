@@ -1,0 +1,118 @@
+body {
+  padding: 50px;
+  font: 14px "微软雅黑";
+  background:url(../images/back/back.png);
+}
+
+a {
+  color: #00B7FF;
+}
+
+/*公共样式*/
+.hide{display: none;}
+.clear{clear: both;}
+.ellipsis {margin: 20px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+.loading{margin:0 10px;display:none;}
+#toastMessage{border-radius:3px;
+	s-moz-box-shadow:0 0 10px #555;               /* For Firefox3.6+ */
+	-webkit-box-shadow:0 0 10px #555;            /* For Chrome5+, Safari5+ */
+	box-shadow:0 0 10px #555;                    /* For Latest Opera */}
+.toast_img{width:16px;height:16px;float:left;margin-right:3px;display:block;}
+.alert_right{background:url(../images/globle_btns_white.png) -72px -93px;}
+.alert_warning{background:url(../images/globle_btns_white.png) -120px -93px;}
+.alert_normal{background:url(../images/globle_btns_white.png) -288px 2px;}
+.relative{position:relative;}
+.bubble-box{ 
+background:#EEE; 
+width:200px; 
+margin-bottom:30px; 
+border-radius:3px;
+} 
+.bubble-box .wrap{ 
+background:#EEE; 
+/* 修正IE6 */ 
+_position:relative; 
+_z-index:10; 
+} 
+/* arrow-effect */ 
+.arrow-left{ border-left:20px solid #FFF; border-top:20px solid #EEE; margin-top:20px;} 
+.arrow-right{ border-right:20px solid #FFF; border-top:20px solid #EEE;} 
+.arrow-top{ border-left:20px solid #EEE; border-top:20px solid #FFF; margin-left:20px;} 
+.arrow-bottom{ border-left:20px solid #EEE; border-bottom:20px solid #FFF; margin-left:20px;} 
+.arrow-left .wrap, 
+.arrow-right .wrap{ 
+width:180px; 
+padding:12px 10px 12px 10px; 
+margin-top:-40px; 
+} 
+.arrow-top, .arrow-bottom{ width:140px;} 
+.arrow-top .wrap, 
+.arrow-bottom .wrap{ 
+width:180px; 
+padding:12px 10px 12px 10px; 
+margin-left:-40px; 
+} 
+
+/*用户头像*/
+.user_photo_wrap{float:left;margin:0 0 0 10px;}
+.user_photo_wrap img{margin:3px 7px;float:left;cursor:pointer;}
+.user_photo_wrap a{margin:9px 0 0 10px;float:left;}
+.user_photo_circle{width:50px;border-radius:10000px;box-shadow: 0 0 10px #aaa;
+	/*获得焦点光晕*/+*padding:1px;+*border:solid 1px #73E4E6;+*background:#fff;}
+.user_photo_circle_small{width:35px;border-radius:10000px;box-shadow: 0 0 10px #aaa;
+	/*获得焦点光晕*/+*padding:1px;+*border:solid 1px #73E4E6;+*background:#fff;}
+.user_photo_conner{width:50px;border-radius:6px;box-shadow: 0 0 6px #aaa;
+	/*获得焦点光晕*/+*padding:1px;+*border:solid 1px #73E4E6;+*background:#fff;}
+
+.logo_img{float:left;width:30px;margin:5px;}
+
+/*头像上传页面*/
+.avatar_b, .avatar_m, .avatar_s {float: left;text-align: center;color: #666;}
+.left {float: left;width: 250px;height: 250px;overflow: hidden;border: 1px solid #ddd;margin-right: 40px;background: #f5f5f5;text-align: center;}
+.left img{width:250px;height:250px;}
+.right {float: left;width: 320px;height: 270px;border-left: 1px #ddd solid;}
+.fixed {display: block;}
+.img {border: 1px solid #ddd;margin-bottom: 10px;overflow: hidden;}
+.avatar_b{margin-left:40px;}
+.avatar_b .img ,.avatar_b .img img{width: 150px;height: 150px;}
+.avatar_m .img ,.avatar_m .img img{width: 75px;height: 75px;}
+.avatar_s .img ,.avatar_s .img img{width: 50px;height: 50px;}
+.avatar_b {padding-top: 40px;}
+.avatar_m {padding-left: 40px;padding-top: 40px;margin-bottom: 10px;}
+.avatar_s {padding-left: 48px;padding-top: 5px;}
+#choosebox {padding:5px;margin-left: 170px;border:1px solid #ccc;background: #E5E5E5;cursor: pointer;}
+
+/*首页样式*/
+.notice{float:left;margin:9px 0 0 10px;}
+.stage{width:55%;min-height:624px;float:left;background:url(../images/back/back4.jpg);padding:10px;border-radius:3px;box-shadow: 0 0 20px #bbb;}
+.group_wrap{width:39%;min-height:624px;float:left;margin:0 0 0 10px;background:#fff;padding:10px;border-radius:3px;box-shadow: 0 0 20px #bbb;}
+.select_wrap{width:65px;height:65px;border:solid 1px #DDE7F8;float:left;margin:10px 12px;background:url(../images/empty.gif);text-align: center;}
+.selected_wrap{width:65px;height:65px;border:solid 1px #DDE7F8;float:left;margin:10px 12px;text-align:center;}
+.signUserImg{margin-top:30px;}
+.apply_btn{float:left;}
+.apply_wrap{float:right;margin:3px 30px 0 0;}
+.start_btn{float: left;margin:5px 0 0 5px;}
+.time_select_btn{float: left;margin:5px 0 0 5px;}
+.start_status_fonts{font-size:14px;padding:0; float: left;height:14px; margin:0 0 0 10px;}
+.start_status_fonts span{letter-spacing:1px;}
+.btn_loading{ float: left;margin:12px 0 0 5px;}
+.span4{background:#eee;border-radius:4px;padding:5px;}
+.span8{background:#eee;border-radius:4px;padding:5px;+*width:200px;overflow:hidden;}
+.tribeMember{width:32px;margin:3px;cursor:pointer;}
+.chat_input_wrap{position:absolute;bottom:0px;left:5px;+*bottom:-5px;}
+.tribe_wrap{height:550px;}
+.chat_wrap{height:550px;}
+.chat_content{width:99.3%;height:490px;background:#fff;margin-top:6px;border:solid 1px #ddd;overflow-y:scroll;}
+#chat_send{float:right;margin:-1px 0 0 5px;+*float:none;+*margin:-10px 0 0 5px;}
+#chat_input{width:250px;}
+.applied_notice_wrap{font-size:12px;}
+.message_wrap{padding:3px;font-size:12px;}
+.message_wrap .photo_wrap{width:35px;float:left;}
+.message_wrap .photo_wrap img{width:35px;margin:2px;}
+.message_wrap .font_wrap{float:left;margin:7px 0 0 5px;}
+.message_wrap .name_time{float:left;margin:-18px 0 0 10px;}
+.message_wrap .message_content{float:left;margin:-17px 0 0 10px;}
+.message_wrap_nophoto{padding:3px;font-size:12px;border-bottom:dotted 1px silver;}
+.message_wrap_nophoto .font_wrap{}
+.message_wrap_nophoto .name_time{}
+.message_wrap_nophoto .message_content{}

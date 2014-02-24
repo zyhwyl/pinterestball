@@ -1,0 +1,320 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" /> 
+<link id="artDialog-skin" href="skins/default.css" rel="stylesheet" />
+<script src="source/artDialog.js" type="text/javascript"></script>
+<script type="text/javascript">
+(function (d) {
+    d['okValue'] = '确定';
+    d['cancelValue'] = '取消';
+    d['title'] = '消息';
+    // [more..]
+})(art.dialog.defaults);
+</script>
+</head>
+
+<body>
+
+<div id="header">
+  <h1 class="title"><strong>artDialog&#8482;</strong><span id="artVersion"></span></h1>
+  <div class="summary" id="summary">
+    <p>artDialog 是一个设计得十分巧妙的对话框组件，小巧身材却拥有丰富的接口与漂亮的外观。</p>
+    <ul>
+      <li>自适应内容</li>
+      <li>优雅的接口</li>
+      <li>细致的体验</li>
+      <li>跨平台兼容</li>
+    </ul>
+    <p id="skin-menu"><a id="showSkinDialog" class="button" href="javascript:;">皮肤演示+</a> <span id="selectSkinValue">default</span></p>
+  </div>
+</div>
+<div id="main">
+  
+  <div id="plugins" class="card">
+    <h2>插件</h2>
+    <p>artDialog 可以通过插件支持拖动、抖动效果， alert、confirm、prompt 方法。只需在 artDialog 之后引用如下文件即可：</p>
+    <pre class="sh_javascript">
+&lt;script src="./artDialog.plugins.min.js"&gt;&lt;/script&gt;</pre>
+    <p>
+      <button id="getPlugins" class="button">加载插件</button>
+    </p>
+    <div id="plugins-demos">
+      <h3>演示插件</h3>
+      <ul>
+        <li>
+          <h3 id="plugins-alert">art.alert(content, [callback])</h3>
+          <pre id="plugins-alert-demo" class="sh_javascript">art.alert('那些年，我们一起追的女孩');
+</pre>
+          <a class="runCode" href="#plugins-alert-demo">运行</a> </li>
+        <li>
+          <h3 id="plugins-confirm">art.confirm(content, ok, [cancel])</h3>
+          <pre id="plugins-confirm-demo" class="sh_javascript">art.confirm('你再也不相信爱情了么？', function () {
+    alert(0);
+}, function () {
+    alert(1);
+});
+</pre>
+          <a class="runCode" href="#plugins-confirm-demo">运行</a> </li>
+        <li>
+          <h3 id="plugins-prompt">art.prompt(content, ok, [defaultValue])</h3>
+          <pre id="plugins-prompt-demo" class="sh_javascript">art.prompt('你的名字是什么？', function (value) {
+    alert(value);
+}, '糖饼');
+</pre>
+          <a class="runCode" href="#plugins-prompt-demo">运行</a> </li>
+        <li>
+          <h3 id="plugins-shake">shake()</h3>
+          <pre id="plugins-shake-demo" class="sh_javascript">art.dialog({
+    id: 'shake-demo',
+    title: '登录',
+    content: '帐号：&lt;input type="text" value="guest" /&gt;&lt;br /&gt;'
+        + '密码：&lt;input id="login-pw" type="text" value="****" /&gt;',
+    lock: true,
+    fixed: true,
+    ok: function () {
+        var pw = document.getElementById('login-pw');
+        pw.select();
+    	pw.focus();
+    	this.shake();
+        return false;
+    },
+    okValue: '登录',
+    cancel: function () {}
+});</pre>
+          <a class="runCode" href="#plugins-shake-demo">运行</a> </li>
+      </ul>
+    </div>
+  </div>
+</div>
+ 
+<div id="skins" style="display:none">
+  <ul id="skins-list">
+    <li><a class="button" href="javascript:;">default</a></li>
+    <li><a class="button" href="javascript:;">aero</a></li>
+    <li><a class="button" href="javascript:;">chrome</a></li>
+    <li><a class="button" href="javascript:;">opera</a></li>
+    <li><a class="button" href="javascript:;">simple</a></li>
+    <li><a class="button" href="javascript:;">idialog</a></li>
+    <li><a class="button" href="javascript:;">twitter</a></li>
+    <li><a class="button" href="javascript:;">blue</a></li>
+    <li><a class="button" href="javascript:;">black</a></li>
+    <li><a class="button" href="javascript:;">green</a></li>
+  </ul>
+ 
+</div>
+<script type="text/javascript">(function () {
+//<![CDATA[
+/*
+SHJS - Syntax Highlighting in JavaScript
+Copyright (C) 2007, 2008 gnombat@users.sourceforge.net
+License: http://shjs.sourceforge.net/doc/gplv3.html
+*/
+var sh_languages = {};function sh_isEmailAddress(a){return/^mailto:/.test(a)?!1:a.indexOf("@")!==-1}function sh_setHref(a,b,c){var d=c.substring(a[b-2].pos,a[b-1].pos);d.length>=2&&d.charAt(0)==="<"&&d.charAt(d.length-1)===">"&&(d=d.substr(1,d.length-2)),sh_isEmailAddress(d)&&(d="mailto:"+d),a[b-2].node.href=d}function sh_konquerorExec(a){var b=[""];return b.index=a.length,b.input=a,b}function sh_highlightString(a,b){if(/Konqueror/.test(navigator.userAgent)&&!b.konquered){for(var c=0;c<b.length;c++)for(var d=0;d<b[c].length;d++){var e=b[c][d][0];e.source==="$"&&(e.exec=sh_konquerorExec)}b.konquered=!0}var f=document.createElement("a"),g=document.createElement("span"),h=[],i=0,j=[],k=0,l=null,m=function(b,c){var d=b.length;if(d===0)return;if(!c){var e=j.length;if(e!==0){var m=j[e-1];m[3]||(c=m[1])}}if(l!==c){l&&(h[i++]={pos:k},l==="sh_url"&&sh_setHref(h,i,a));if(c){var n;c==="sh_url"?n=f.cloneNode(!1):n=g.cloneNode(!1),n.className=c,h[i++]={node:n,pos:k}}}k+=d,l=c},n=/\r\n|\r|\n/g;n.lastIndex=0;var o=a.length;while(k<o){var p=k,q,r,s=n.exec(a);s===null?(q=o,r=o):(q=s.index,r=n.lastIndex);var t=a.substring(p,q),u=[];for(;;){var v=k-p,w,x=j.length;x===0?w=0:w=j[x-1][2];var y=b[w],z=y.length,A=u[w];A||(A=u[w]=[]);var B=null,C=-1;for(var D=0;D<z;D++){var E;if(D<A.length&&(A[D]===null||v<=A[D].index))E=A[D];else{var F=y[D][0];F.lastIndex=v,E=F.exec(t),A[D]=E}if(E!==null&&(B===null||E.index<B.index)){B=E,C=D;if(E.index===v)break}}if(B===null){m(t.substring(v),null);break}B.index>v&&m(t.substring(v,B.index),null);var G=y[C],H=G[1],I;if(H instanceof Array)for(var J=0;J<H.length;J++)I=B[J+1],m(I,H[J]);else I=B[0],m(I,H);switch(G[2]){case-1:break;case-2:j.pop();break;case-3:j.length=0;break;default:j.push(G)}}l&&(h[i++]={pos:k},l==="sh_url"&&sh_setHref(h,i,a),l=null),k=r}return h}function sh_getClasses(a){var b=[],c=a.className;if(c&&c.length>0){var d=c.split(" ");for(var e=0;e<d.length;e++)d[e].length>0&&b.push(d[e])}return b}function sh_addClass(a,b){var c=sh_getClasses(a);for(var d=0;d<c.length;d++)if(b.toLowerCase()===c[d].toLowerCase())return;c.push(b),a.className=c.join(" ")}function sh_extractTagsFromNodeList(a,b){var c=a.length;for(var d=0;d<c;d++){var e=a.item(d);switch(e.nodeType){case 1:if(e.nodeName.toLowerCase()==="br"){var f;/MSIE/.test(navigator.userAgent)?f="\r":f="\n",b.text.push(f),b.pos++}else b.tags.push({node:e.cloneNode(!1),pos:b.pos}),sh_extractTagsFromNodeList(e.childNodes,b),b.tags.push({pos:b.pos});break;case 3:case 4:b.text.push(e.data),b.pos+=e.length}}}function sh_extractTags(a,b){var c={};return c.text=[],c.tags=b,c.pos=0,sh_extractTagsFromNodeList(a.childNodes,c),c.text.join("")}function sh_mergeTags(a,b){var c=a.length;if(c===0)return b;var d=b.length;if(d===0)return a;var e=[],f=0,g=0;while(f<c&&g<d){var h=a[f],i=b[g];h.pos<=i.pos?(e.push(h),f++):(e.push(i),b[g+1].pos<=h.pos?(g++,e.push(b[g]),g++):(e.push({pos:h.pos}),b[g]={node:i.node.cloneNode(!1),pos:h.pos}))}while(f<c)e.push(a[f]),f++;while(g<d)e.push(b[g]),g++;return e}function sh_insertTags(a,b){var c=document,d=document.createDocumentFragment(),e=0,f=a.length,g=0,h=b.length,i=d;while(g<h||e<f){var j,k;e<f?(j=a[e],k=j.pos):k=h;if(k<=g){if(j.node){var l=j.node;i.appendChild(l),i=l}else i=i.parentNode;e++}else i.appendChild(c.createTextNode(b.substring(g,k))),g=k}return d}function sh_highlightElement(a,b){sh_addClass(a,"sh_sourceCode");var c=[],d=sh_extractTags(a,c),e=sh_highlightString(d,b),f=sh_mergeTags(c,e),g=sh_insertTags(f,d);while(a.hasChildNodes())a.removeChild(a.firstChild);a.appendChild(g)}function sh_getXMLHttpRequest(){if(window.ActiveXObject)return new ActiveXObject("Msxml2.XMLHTTP");if(window.XMLHttpRequest)return new XMLHttpRequest;throw"No XMLHttpRequest implementation available"}function sh_load(language,element,prefix,suffix){if(language in sh_requests){sh_requests[language].push(element);return}sh_requests[language]=[element];var request=sh_getXMLHttpRequest(),url=prefix+"sh_"+language+suffix;request.open("GET",url,!0),request.onreadystatechange=function(){if(request.readyState===4)try{if(!!request.status&&request.status!==200)throw"HTTP error: status "+request.status;eval(request.responseText);var elements=sh_requests[language];for(var i=0;i<elements.length;i++)sh_highlightElement(elements[i],sh_languages[language])}finally{request=null}},request.send(null)}function sh_highlightDocument(a,b){var c=document.getElementsByTagName("pre");for(var d=0;d<c.length;d++){var e=c.item(d),f=sh_getClasses(e);for(var g=0;g<f.length;g++){var h=f[g].toLowerCase();if(h==="sh_sourcecode")continue;if(h.substr(0,3)==="sh_"){var i=h.substring(3);if(i in sh_languages)sh_highlightElement(e,sh_languages[i]);else if(typeof a=="string"&&typeof b=="string")sh_load(i,e,a,b);else throw'Found <pre> element with class="'+h+'", but no such language exists';break}}}}var sh_requests={};sh_languages.javascript=[[[/\/\/\//g,"sh_comment",1],[/\/\//g,"sh_comment",7],[/\/\*\*/g,"sh_comment",8],[/\/\*/g,"sh_comment",9],[/\b(?:abstract|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|false|final|finally|for|function|goto|if|implements|in|instanceof|interface|native|new|null|private|protected|prototype|public|return|static|super|switch|synchronized|throw|throws|this|transient|true|try|typeof|var|volatile|while|with)\b/g,"sh_keyword",-1],[/(\+\+|--|\)|\])(\s*)(\/=?(?![*\/]))/g,["sh_symbol","sh_normal","sh_symbol"],-1],[/(0x[A-Fa-f0-9]+|(?:[\d]*\.)?[\d]+(?:[eE][+-]?[\d]+)?)(\s*)(\/(?![*\/]))/g,["sh_number","sh_normal","sh_symbol"],-1],[/([A-Za-z$_][A-Za-z0-9$_]*\s*)(\/=?(?![*\/]))/g,["sh_normal","sh_symbol"],-1],[/\/(?:\\.|[^*\\\/])(?:\\.|[^\\\/])*\/[gim]*/g,"sh_regexp",-1],[/\b[+-]?(?:(?:0x[A-Fa-f0-9]+)|(?:(?:[\d]*\.)?[\d]+(?:[eE][+-]?[\d]+)?))u?(?:(?:int(?:8|16|32|64))|L)?\b/g,"sh_number",-1],[/"/g,"sh_string",10],[/'/g,"sh_string",11],[/~|!|%|\^|\*|\(|\)|-|\+|=|\[|\]|\\|:|;|,|\.|\/|\?|&|<|>|\|/g,"sh_symbol",-1],[/\{|\}/g,"sh_cbracket",-1],[/\b(?:Math|Infinity|NaN|undefined|arguments)\b/g,"sh_predef_var",-1],[/\b(?:Array|Boolean|Date|Error|EvalError|Function|Number|Object|RangeError|ReferenceError|RegExp|String|SyntaxError|TypeError|URIError|decodeURI|decodeURIComponent|encodeURI|encodeURIComponent|eval|isFinite|isNaN|parseFloat|parseInt)\b/g,"sh_predef_func",-1],[/\b(?:applicationCache|closed|Components|content|controllers|crypto|defaultStatus|dialogArguments|directories|document|frameElement|frames|fullScreen|globalStorage|history|innerHeight|innerWidth|length|location|locationbar|menubar|name|navigator|opener|outerHeight|outerWidth|pageXOffset|pageYOffset|parent|personalbar|pkcs11|returnValue|screen|availTop|availLeft|availHeight|availWidth|colorDepth|height|left|pixelDepth|top|width|screenX|screenY|scrollbars|scrollMaxX|scrollMaxY|scrollX|scrollY|self|sessionStorage|sidebar|status|statusbar|toolbar|top|window)\b/g,"sh_predef_var",-1],[/\b(?:alert|addEventListener|atob|back|blur|btoa|captureEvents|clearInterval|clearTimeout|close|confirm|dump|escape|find|focus|forward|getAttention|getComputedStyle|getSelection|home|moveBy|moveTo|open|openDialog|postMessage|print|prompt|releaseEvents|removeEventListener|resizeBy|resizeTo|scroll|scrollBy|scrollByLines|scrollByPages|scrollTo|setInterval|setTimeout|showModalDialog|sizeToContent|stop|unescape|updateCommands|onabort|onbeforeunload|onblur|onchange|onclick|onclose|oncontextmenu|ondragdrop|onerror|onfocus|onkeydown|onkeypress|onkeyup|onload|onmousedown|onmousemove|onmouseout|onmouseover|onmouseup|onpaint|onreset|onresize|onscroll|onselect|onsubmit|onunload)\b/g,"sh_predef_func",-1],[/(?:[A-Za-z]|_)[A-Za-z0-9_]*(?=[ \t]*\()/g,"sh_function",-1]],[[/$/g,null,-2],[/(?:<?)[A-Za-z0-9_\.\/\-_~]+@[A-Za-z0-9_\.\/\-_~]+(?:>?)|(?:<?)[A-Za-z0-9_]+:\/\/[A-Za-z0-9_\.\/\-_~]+(?:>?)/g,"sh_url",-1],[/<\?xml/g,"sh_preproc",2,1],[/<!DOCTYPE/g,"sh_preproc",4,1],[/<!--/g,"sh_comment",5],[/<(?:\/)?[A-Za-z](?:[A-Za-z0-9_:.-]*)(?:\/)?>/g,"sh_keyword",-1],[/<(?:\/)?[A-Za-z](?:[A-Za-z0-9_:.-]*)/g,"sh_keyword",6,1],[/&(?:[A-Za-z0-9]+);/g,"sh_preproc",-1],[/<(?:\/)?[A-Za-z][A-Za-z0-9]*(?:\/)?>/g,"sh_keyword",-1],[/<(?:\/)?[A-Za-z][A-Za-z0-9]*/g,"sh_keyword",6,1],[/@[A-Za-z]+/g,"sh_type",-1],[/(?:TODO|FIXME|BUG)(?:[:]?)/g,"sh_todo",-1]],[[/\?>/g,"sh_preproc",-2],[/([^=" \t>]+)([ \t]*)(=?)/g,["sh_type","sh_normal","sh_symbol"],-1],[/"/g,"sh_string",3]],[[/\\(?:\\|")/g,null,-1],[/"/g,"sh_string",-2]],[[/>/g,"sh_preproc",-2],[/([^=" \t>]+)([ \t]*)(=?)/g,["sh_type","sh_normal","sh_symbol"],-1],[/"/g,"sh_string",3]],[[/-->/g,"sh_comment",-2],[/<!--/g,"sh_comment",5]],[[/(?:\/)?>/g,"sh_keyword",-2],[/([^=" \t>]+)([ \t]*)(=?)/g,["sh_type","sh_normal","sh_symbol"],-1],[/"/g,"sh_string",3]],[[/$/g,null,-2]],[[/\*\//g,"sh_comment",-2],[/(?:<?)[A-Za-z0-9_\.\/\-_~]+@[A-Za-z0-9_\.\/\-_~]+(?:>?)|(?:<?)[A-Za-z0-9_]+:\/\/[A-Za-z0-9_\.\/\-_~]+(?:>?)/g,"sh_url",-1],[/<\?xml/g,"sh_preproc",2,1],[/<!DOCTYPE/g,"sh_preproc",4,1],[/<!--/g,"sh_comment",5],[/<(?:\/)?[A-Za-z](?:[A-Za-z0-9_:.-]*)(?:\/)?>/g,"sh_keyword",-1],[/<(?:\/)?[A-Za-z](?:[A-Za-z0-9_:.-]*)/g,"sh_keyword",6,1],[/&(?:[A-Za-z0-9]+);/g,"sh_preproc",-1],[/<(?:\/)?[A-Za-z][A-Za-z0-9]*(?:\/)?>/g,"sh_keyword",-1],[/<(?:\/)?[A-Za-z][A-Za-z0-9]*/g,"sh_keyword",6,1],[/@[A-Za-z]+/g,"sh_type",-1],[/(?:TODO|FIXME|BUG)(?:[:]?)/g,"sh_todo",-1]],[[/\*\//g,"sh_comment",-2],[/(?:<?)[A-Za-z0-9_\.\/\-_~]+@[A-Za-z0-9_\.\/\-_~]+(?:>?)|(?:<?)[A-Za-z0-9_]+:\/\/[A-Za-z0-9_\.\/\-_~]+(?:>?)/g,"sh_url",-1],[/(?:TODO|FIXME|BUG)(?:[:]?)/g,"sh_todo",-1]],[[/"/g,"sh_string",-2],[/\\./g,"sh_specialchar",-1]],[[/'/g,"sh_string",-2],[/\\./g,"sh_specialchar",-1]]];
+
+
+
+
+sh_highlightDocument();
+
+$('#artVersion').html(art.dialog.version || '');
+
+// 运行代码
+$.prototype.runCode = function () {
+    var getText = function(elems) {
+        var ret = "", elem;
+
+        for ( var i = 0; elems[i]; i++ ) {
+            elem = elems[i];
+            if ( elem.nodeType === 3 || elem.nodeType === 4 ) {
+                ret += elem.nodeValue;
+            } else if ( elem.nodeType !== 8 ) {
+                ret += getText( elem.childNodes );
+            };
+        };
+
+        return ret;
+    };
+    
+    var code = getText(this);
+    
+	try {
+		new Function(code).call(window);
+	} catch (e) {
+		window.console && console.error(e);
+	};
+    
+    return this;
+};
+
+// 代码运行按钮
+var runCodeBtn = function (event) {
+    var target = event.target,
+        type = event.type,
+        $target = $(target);
+
+    if (!target.nodeName === 'A' || !$target.hasClass('runCode')) {
+        return;
+    };
+    
+	var code = target.getAttribute('href', 2);
+    var $code = $(code);
+    
+    
+    
+    if (type === 'click') {
+        $code.runCode();
+    } else if (type === 'mouseover') {
+        
+        clearTimeout(target.timer);
+        $code.addClass('select');
+        
+    } else if (type === 'mouseout') {
+        
+        target.timer = setTimeout(function () {
+            $code.removeClass('select');
+        }, 300);
+    };
+    
+    
+    return false;
+};
+$(document).bind('click', runCodeBtn);
+$(document).bind('mouseover', runCodeBtn);
+$(document).bind('mouseout', runCodeBtn);
+
+
+// 异步加载 js
+$.getScript = $.getScript || function (url, callback) {
+	
+	var query = arguments[2] || '';
+	var ts = + new Date;
+	var ret = url.replace(/([?&])_=[^&]*/, "$1_=" + ts );
+	
+
+	url = ret + ((ret === url) ? (/\?/.test(url) ? '&' : '?') + '_=' + ts : '');
+	url = url + query;
+
+	var head = document.head || document.getElementsByTagName('head')[0];
+	var script = document.createElement('script');
+	
+	
+	script.async = 'async';
+	
+	
+	script.onload = script.onreadystatechange = function () {
+	
+		var isReady = !script.readyState
+		|| /loaded|complete/.test(script.readyState);
+		
+		if (isReady) {
+
+			script.onload = script.onreadystatechange = null;
+			head.removeChild(script);
+
+			callback && callback();
+		};
+		
+	};
+	
+	script.src = url;
+	head.appendChild(script);
+};
+
+$('#plugins-demos').hide();
+$('#getPlugins').bind('click', function () {
+	var that = this,
+		url = './source/artDialog.plugins.js';
+		
+	that.disabled = true;
+	
+	$.getScript(url, function () {
+		//$.alert(url + ' 插件加载成功！');
+		that.innerHTML = '插件已加载';
+		$('#plugins-demos').show();
+	});
+	
+	return false;
+})[0].disabled = false;
+
+
+// 皮肤演示
+var skinDialog = art.dialog({
+    id: 'dialog-skins-demo',
+    title: '皮肤演示',
+    content: $('#skins')[0],
+    fixed: true,
+    initialize: function () {
+        this.hidden();
+    },
+    beforeunload: function () {
+        this.hidden();
+        return false;
+    }
+});
+
+var getDemoStyle = function (skin) {
+    $('#artDialog-skin')[0].href = 'skins/' + skin + '.css?' + + new Date;
+    skinDialog.hidden();
+    setTimeout(function () {
+        skinDialog.visible();
+        $('#selectSkinValue')[0].innerHTML = skin;
+    }, 150);
+};
+
+$('#skins-list').bind('click', function (event) {
+    var target = event.target;
+    var skin = target.innerHTML;
+    
+    if (target.nodeName === 'A') {
+        getDemoStyle(skin);
+        return false;
+    };
+
+});
+
+$('#showSkinDialog').bind('click', function () {
+    skinDialog.visible().zIndex();
+    return false;
+});
+
+$('#showChange').bind('click', function () {
+    $(document.body).addClass('showChange');
+	this.disabled = true;
+    this.innerHTML += '-已设置!';
+    return false;
+})[0].disabled = false;
+
+
+// 打印按钮
+$('#print').bind('click', function () {
+    print();
+    return false;
+});
+
+
+//]]>
+})();</script> 
+<script type="text/javascript">
+//<![CDATA[
+
+// google-analytics
+var _gaq = _gaq || [];
+
+_gaq.push(['_setAccount', 'UA-19823759-2']);
+_gaq.push(['_setDomainName', '.planeart.cn']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+
+var ga = document.createElement('script'); ga.type = 'text/javascript';ga.async = true;
+
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+
+})();
+//]]>
+</script>
+</body>
+</html>

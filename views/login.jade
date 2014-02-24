@@ -1,0 +1,51 @@
+doctype 5
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap-responsive.css')
+    style(type="text/css")
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+  body
+    include head
+    form(class="form-horizontal",method="post")
+      fieldset
+        legend 用户登录
+        div.control-group
+          label(class="control-label",for="email") 邮&nbsp;&nbsp;箱
+          div.controls
+            div.input-prepend
+              span.add-on
+                i.icon-envelope 
+              input(type="text" class="input-xlarge" id="email" name="email")
+            p.help-block 
+        div.control-group
+          label(class="control-label",for="password") 密&nbsp;&nbsp;码
+          div.controls
+            div.input-prepend
+              span.add-on
+                i.icon-th
+              input(type="password" class="input-xlarge" id="password" name="password")
+            p.help-block 
+        .form-actions
+          button(type="submit" class="btn btn-primary") 登录
+          button(type="reset" class="btn btn-primary" style="margin-left:10px;") 重置 
+        .errors
+          if error!=""
+            | #{error}
+    include footer

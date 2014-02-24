@@ -1,0 +1,36 @@
+hr
+footer.footer
+  div.container
+    p &copy; 
+      span.blue 生命如烟--程序员也要爱运动... 2013
+<!--引入js文件-->
+<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/ajaxform.js"></script>
+<script src="/javascripts/bootstrap.min.js"></script>
+<script src="/javascripts/jquery.overlay.min.js"></script>
+script(type="text/javascript" src="/javascripts/socket.io.js")
+script
+    Date.prototype.datetime = function() {
+     year = this.getFullYear();
+     month = this.getMonth() + 1;
+     day = this.getDate();
+     hours = this.getHours();
+     minute = this.getMinutes();
+     second = this.getSeconds();
+
+     month = month >= 10 ? month : '0' + month;
+     day = day >= 10 ? day : '0' + day;
+     hours = hours >= 10 ? hours : '0' + hours;
+     minute = minute >= 10 ? minute : '0' + minute;
+     second = second >= 10 ? second : '0' + second;
+
+     return year+'-'+month+'-'+day+' '+hours+':'+minute+':'+second;
+    };
+div(class="modal hide")
+  .modal-header
+    button(type="button" class="close" data-dismiss="modal" aria-hidden="true") &times;
+    h3 对话框标题
+  .modal-body
+  .modal-footer
+    a(href="#" class="btn") 关闭
+    a(href="#" class="btn btn-primary") 保存
